@@ -8,7 +8,7 @@ source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxV
 APP="Stoatchat"
 var_tags="${var_tags:-chat;messaging;community}"
 var_cpu="${var_cpu:-4}"
-var_ram="${var_ram:-8192}"
+var_ram="${var_ram:-10240}"
 var_disk="${var_disk:-30}"
 var_os="${var_os:-debian}"
 var_version="${var_version:-13}"
@@ -42,7 +42,7 @@ function update_script() {
 
     msg_info "Rebuilding Backend (Patience)"
     cd /opt/stoatchat
-    $STD cargo build --release --bins
+    $STD cargo build --release --bins -j 2
     msg_ok "Rebuilt Backend"
 
     msg_info "Updating Web Frontend"

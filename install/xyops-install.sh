@@ -56,8 +56,6 @@ Type=simple
 User=root
 WorkingDirectory=/opt/xyops
 Environment=XYOPS_foreground=1
-Environment=XYOPS_xysat_local=1
-Environment=XYOPS_masters=${LOCAL_IP}
 ExecStart=/usr/bin/node /opt/xyops/lib/main.js
 Restart=on-failure
 RestartSec=5

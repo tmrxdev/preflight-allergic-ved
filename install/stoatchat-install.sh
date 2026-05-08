@@ -39,7 +39,7 @@ fetch_and_deploy_gh_release "stoatchat" "stoatchat/stoatchat" "tarball"
 
 msg_info "Building Backend (Patience)"
 cd /opt/stoatchat
-$STD cargo build --release --bins
+$STD cargo build --release --bins -j 2
 msg_ok "Built Backend"
 
 NODE_VERSION="22" setup_nodejs
