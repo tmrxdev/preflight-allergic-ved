@@ -48,6 +48,7 @@ AIRFLOW__CORE__EXECUTOR=LocalExecutor
 AIRFLOW__CORE__FERNET_KEY=${FERNET_KEY}
 AIRFLOW__CORE__DAGS_FOLDER=/opt/airflow/dags
 AIRFLOW__CORE__LOAD_EXAMPLES=false
+AIRFLOW__CORE__AUTH_MANAGER=airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
 AIRFLOW__API__AUTH_BACKENDS=airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session
 AIRFLOW__WEBSERVER__SECRET_KEY=${SECRET_KEY}
 AIRFLOW__WEBSERVER__BASE_URL=http://${LOCAL_IP}:8080
