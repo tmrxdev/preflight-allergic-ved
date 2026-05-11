@@ -44,6 +44,7 @@ function update_script() {
     msg_info "Restoring Data"
     cp -r /opt/flame_data_backup/. /opt/flame/data
     cp /opt/flame.env.bak /opt/flame/.env
+    sed -i "s/^VERSION=.*/VERSION=$(cat ~/.flame)/" /opt/flame/.env
     rm -rf /opt/flame_data_backup /opt/flame.env.bak
     msg_ok "Restored Data"
 

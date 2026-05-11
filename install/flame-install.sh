@@ -32,8 +32,10 @@ $STD npm install --production
 $STD npm run build
 cd /opt/flame
 cp -r client/build/. public/
+FLAME_VERSION=$(cat ~/.flame)
 cat <<EOF >/opt/flame/.env
 NODE_ENV=production
+VERSION=${FLAME_VERSION}
 PASSWORD=
 EOF
 msg_ok "Set up Flame"
