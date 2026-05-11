@@ -48,8 +48,7 @@ function update_script() {
     msg_ok "Restored Data"
 
     msg_info "Starting Service"
-    systemctl start php${PHP_VER}-fpm
-    systemctl start caddy
+    systemctl start caddy php${PHP_VER}-fpm
     msg_ok "Started Service"
     msg_ok "Updated successfully!"
   fi
