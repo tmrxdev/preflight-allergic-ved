@@ -75,4 +75,6 @@ description
 msg_ok "Completed Successfully!\n"
 echo -e "${CREATING}${GN}${APP} setup has been successfully initialized!${CL}"
 echo -e "${INFO}${YW} Access it using the following URLs:${CL}"
-echo -e "${TAB}${GATEWAY}${BGN}https://${IP}:4000${CL} (Web UI + API - accept self-signed cert)"
+echo -e "${TAB}${GATEWAY}${BGN}https://${IP}:4000${CL} (Web UI - accept self-signed cert)"
+echo -e "${INFO}${YW} When adding a server in the app, use:${CL}"
+echo -e "${TAB}${GATEWAY}${BGN}https://${IP}:4000/config${CL}"

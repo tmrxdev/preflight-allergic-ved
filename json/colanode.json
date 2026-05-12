@@ -33,7 +33,7 @@
     },
     "notes": [
         {
-            "text": "Web UI is available at https://YOUR_IP:4000 (self-signed certificate — accept the browser warning). When adding a server in the app, use https://YOUR_IP:4000 as the server URL.",
+            "text": "Web UI is available at https://YOUR_IP:4000 (self-signed certificate — accept the browser warning in the browser). When adding a server inside the app, enter https://YOUR_IP:4000/config as the server URL.",
             "type": "info"
         },
         {
