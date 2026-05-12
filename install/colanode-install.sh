@@ -51,12 +51,16 @@ EOF
 msg_ok "Configured Application"
 
 msg_info "Configuring Nginx"
+create_self_signed_cert "colanode"
 cat <<EOF >/etc/nginx/sites-available/colanode
 server {
-    listen 4000;
+    listen 4000 ssl;
     server_name _;
     root /var/www/colanode;
     index index.html;
+
+    ssl_certificate /etc/ssl/colanode/colanode.crt;
+    ssl_certificate_key /etc/ssl/colanode/colanode.key;
 
     location / {
         try_files \$uri \$uri/ /index.html;

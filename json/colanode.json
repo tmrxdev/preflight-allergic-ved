@@ -33,7 +33,7 @@
     },
     "notes": [
         {
-            "text": "Web UI is available on port 4000. Connect it to the API server at http://YOUR_IP:3000 from within the app.",
+            "text": "Web UI is available at https://YOUR_IP:4000 (self-signed certificate — accept the browser warning). Connect it to the API server at http://YOUR_IP:3000 from within the app.",
             "type": "info"
         },
         {
