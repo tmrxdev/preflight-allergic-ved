@@ -20,7 +20,7 @@ $STD apt install -y \
   jpegoptim
 msg_ok "Installed Dependencies"
 
-PHP_VERSION="8.4" PHP_FPM="YES" PHP_MODULES="bcmath,ldap,exif,gd,intl,imagick,redis,zip,pdo_pgsql,pcntl" setup_php
+PHP_VERSION="8.4" PHP_FPM="YES" PHP_MODULE="bcmath,ldap,exif,gd,intl,imagick,redis,zip,pdo_pgsql,pcntl" setup_php
 
 setup_ffmpeg
 setup_imagemagick

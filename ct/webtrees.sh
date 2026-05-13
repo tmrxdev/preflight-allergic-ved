@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVED/main/misc/build.func)
 # Copyright (c) 2021-2026 community-scripts ORG
-# Author: MickLesk (CanbiZ)
+# Author: sudofly
 # License: MIT | https://github.com/community-scripts/ProxmoxVED/raw/main/LICENSE
-# Source: https://github.com/HeyPuter/puter
+# Source: https://webtrees.net/
 
-APP="Puter"
-var_tags="${var_tags:-cloud;desktop;files}"
+APP="Webtrees"
+var_tags="${var_tags:-genealogy;cms}"
 var_cpu="${var_cpu:-2}"
 var_ram="${var_ram:-2048}"
 var_disk="${var_disk:-8}"
@@ -24,26 +24,31 @@ function update_script() {
   check_container_storage
   check_container_resources
 
-  if [[ ! -d /opt/puter ]]; then
+  if [[ ! -d /opt/webtrees ]]; then
     msg_error "No ${APP} Installation Found!"
     exit
   fi
 
-  if check_for_gh_release "puter" "HeyPuter/puter"; then
+  if check_for_gh_release "webtrees" "fisharebest/webtrees"; then
     msg_info "Stopping Service"
-    systemctl stop puter
+    PHP_VER=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;')
+    systemctl stop caddy php${PHP_VER}-fpm
     msg_ok "Stopped Service"
 
-    CLEAN_INSTALL=1 fetch_and_deploy_gh_release "puter" "HeyPuter/puter" "tarball"
+    msg_info "Backing up Data"
+    cp -r /opt/webtrees/data /opt/webtrees_data_backup
+    msg_ok "Backed up Data"
 
-    msg_info "Building Application"
-    cd /opt/puter
-    $STD npm ci
-    $STD npm run build
-    msg_ok "Built Application"
+    CLEAN_INSTALL=1 fetch_and_deploy_gh_release "webtrees" "fisharebest/webtrees" "prebuild" "latest" "/opt/webtrees" "webtrees-*.zip"
+
+    msg_info "Restoring Data"
+    cp -r /opt/webtrees_data_backup/. /opt/webtrees/data
+    rm -rf /opt/webtrees_data_backup
+    chown -R www-data:www-data /opt/webtrees
+    msg_ok "Restored Data"
 
     msg_info "Starting Service"
-    systemctl start puter
+    systemctl start caddy php${PHP_VER}-fpm
     msg_ok "Started Service"
     msg_ok "Updated successfully!"
   fi
@@ -57,4 +62,4 @@ description
 msg_ok "Completed Successfully!\n"
 echo -e "${CREATING}${GN}${APP} setup has been successfully initialized!${CL}"
 echo -e "${INFO}${YW} Access it using the following URL:${CL}"
-echo -e "${TAB}${GATEWAY}${BGN}http://${IP}.nip.io:4100${CL}"
+echo -e "${TAB}${GATEWAY}${BGN}http://${IP}${CL}"
